@@ -1,0 +1,100 @@
+categories:
+  - name: "Environment"
+    icon: "\U0001F510"
+    color: "#f59e0b"
+    priority: 1
+    patterns:
+      - name: ".env"
+        globs: [".env"]
+        parser: "env"
+        description: "Environment variables"
+      - name: ".env variants"
+        globs: [".env.*"]
+        parser: "env"
+        description: "Environment-specific variables"
+      - name: "Nested .env"
+        globs: ["**/.env", "**/.env.*"]
+        parser: "env"
+        description: "Nested environment files"
+      - name: ".envrc"
+        globs: [".envrc"]
+        parser: "env"
+        description: "direnv configuration"
+
+  - name: "Docker"
+    icon: "\U0001F433"
+    color: "#0db7ed"
+    priority: 2
+    patterns:
+      - name: "Dockerfile"
+        globs: ["Dockerfile", "Dockerfile.*", "**/Dockerfile", "**/Dockerfile.*", "*.dockerfile"]
+        parser: "dockerfile"
+        description: "Docker image definition"
+      - name: "Docker Compose"
+        globs: ["docker-compose.yml", "docker-compose.yaml", "docker-compose.*.yml", "docker-compose.*.yaml", "compose.yml", "compose.yaml", "compose.*.yml", "compose.*.yaml"]
+        parser: "yaml"
+        description: "Docker Compose services"
+      - name: ".dockerignore"
+        globs: [".dockerignore", "**/.dockerignore"]
+        parser: "text"
+        description: "Docker build ignore rules"
+
+  - name: "CI/CD"
+    icon: "\u2699\uFE0F"
+    color: "#8b5cf6"
+    priority: 3
+    patterns:
+      - name: "GitHub Actions"
+        globs: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+        parser: "yaml"
+        description: "GitHub Actions workflows"
+      - name: "GitLab CI"
+        globs: [".gitlab-ci.yml", ".gitlab-ci.yaml"]
+        parser: "yaml"
+        description: "GitLab CI pipeline"
+
+  - name: "JavaScript / Node"
+    icon: "\U0001F4E6"
+    color: "#f7df1e"
+    priority: 6
+    patterns:
+      - name: "package.json"
+        globs: ["package.json"]
+        parser: "json"
+        description: "Node.js package manifest"
+      - name: "tsconfig"
+        globs: ["tsconfig.json", "tsconfig.*.json"]
+        parser: "json"
+        description: "TypeScript configuration"
+      - name: ".nvmrc"
+        globs: [".nvmrc", ".node-version"]
+        parser: "text"
+        description: "Node version specification"
+
+  - name: "Linting / Formatting"
+    icon: "\u2728"
+    color: "#06b6d4"
+    priority: 10
+    patterns:
+      - name: "ESLint"
+        globs: [".eslintrc", ".eslintrc.*", "eslint.config.*"]
+        parser: "json"
+        description: "ESLint linter configuration"
+      - name: "Prettier"
+        globs: [".prettierrc", ".prettierrc.*", "prettier.config.*"]
+        parser: "json"
+        description: "Prettier formatter configuration"
+      - name: "EditorConfig"
+        globs: [".editorconfig"]
+        parser: "ini"
+        description: "Editor configuration"
+
+  - name: "Git"
+    icon: "\U0001F4DD"
+    color: "#f05032"
+    priority: 11
+    patterns:
+      - name: ".gitignore"
+        globs: [".gitignore"]
+        parser: "text"
+        description: "Git ignore rules"
