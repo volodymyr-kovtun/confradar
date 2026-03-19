@@ -20,6 +20,14 @@ categories:
         globs: [".envrc"]
         parser: "env"
         description: "direnv configuration"
+      - name: ".secrets"
+        globs: [".secrets", ".secrets.*", "**/.secrets"]
+        parser: "env"
+        description: "Secret files"
+      - name: ".env.vault"
+        globs: [".env.vault"]
+        parser: "env"
+        description: "Encrypted env vault"
 
   - name: "Docker"
     icon: "\U0001F433"
@@ -38,6 +46,10 @@ categories:
         globs: [".dockerignore", "**/.dockerignore"]
         parser: "text"
         description: "Docker build ignore rules"
+      - name: "Docker Bake"
+        globs: ["docker-bake.hcl", "docker-bake.json"]
+        parser: "text"
+        description: "Docker Buildx Bake"
 
   - name: "CI/CD"
     icon: "\u2699\uFE0F"
@@ -52,6 +64,102 @@ categories:
         globs: [".gitlab-ci.yml", ".gitlab-ci.yaml"]
         parser: "yaml"
         description: "GitLab CI pipeline"
+      - name: "Jenkins"
+        globs: ["Jenkinsfile", "Jenkinsfile.*"]
+        parser: "text"
+        description: "Jenkins pipeline"
+      - name: "CircleCI"
+        globs: [".circleci/config.yml", ".circleci/config.yaml"]
+        parser: "yaml"
+        description: "CircleCI configuration"
+      - name: "Travis CI"
+        globs: [".travis.yml"]
+        parser: "yaml"
+        description: "Travis CI configuration"
+      - name: "Azure Pipelines"
+        globs: ["azure-pipelines.yml", ".azure-pipelines/*.yml"]
+        parser: "yaml"
+        description: "Azure DevOps Pipelines"
+      - name: "Bitbucket Pipelines"
+        globs: ["bitbucket-pipelines.yml"]
+        parser: "yaml"
+        description: "Bitbucket Pipelines"
+      - name: "Drone CI"
+        globs: [".drone.yml"]
+        parser: "yaml"
+        description: "Drone CI configuration"
+      - name: "Woodpecker CI"
+        globs: [".woodpecker.yml", ".woodpecker/*.yml"]
+        parser: "yaml"
+        description: "Woodpecker CI configuration"
+      - name: "GitHub Actions config"
+        globs: [".github/dependabot.yml", ".github/dependabot.yaml"]
+        parser: "yaml"
+        description: "Dependabot configuration"
+
+  - name: "Web Server"
+    icon: "\U0001F310"
+    color: "#10b981"
+    priority: 4
+    patterns:
+      - name: "Nginx"
+        globs: ["nginx.conf", "**/nginx.conf", "nginx/*.conf"]
+        parser: "nginx"
+        description: "Nginx web server config"
+      - name: "Apache"
+        globs: [".htaccess", "httpd.conf", "apache2.conf"]
+        parser: "text"
+        description: "Apache web server config"
+      - name: "Caddy"
+        globs: ["Caddyfile"]
+        parser: "text"
+        description: "Caddy web server config"
+      - name: "Traefik"
+        globs: ["traefik.yml", "traefik.yaml", "traefik.toml"]
+        parser: "yaml"
+        description: "Traefik reverse proxy config"
+      - name: "HAProxy"
+        globs: ["haproxy.cfg"]
+        parser: "text"
+        description: "HAProxy load balancer config"
+
+  - name: "Build Tools"
+    icon: "\U0001F528"
+    color: "#ef4444"
+    priority: 5
+    patterns:
+      - name: "Makefile"
+        globs: ["Makefile", "makefile", "GNUmakefile"]
+        parser: "text"
+        description: "Make build system"
+      - name: "CMake"
+        globs: ["CMakeLists.txt"]
+        parser: "text"
+        description: "CMake build system"
+      - name: "Gradle"
+        globs: ["build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts", "gradle.properties"]
+        parser: "text"
+        description: "Gradle build system"
+      - name: "Maven"
+        globs: ["pom.xml"]
+        parser: "text"
+        description: "Maven build system"
+      - name: "Taskfile"
+        globs: ["Taskfile.yml", "Taskfile.yaml", "Taskfile.dist.yml"]
+        parser: "yaml"
+        description: "Task runner"
+      - name: "Just"
+        globs: ["justfile", "Justfile", ".justfile"]
+        parser: "text"
+        description: "Just command runner"
+      - name: "Bazel"
+        globs: ["BUILD", "BUILD.bazel", "WORKSPACE", "WORKSPACE.bazel", ".bazelrc"]
+        parser: "text"
+        description: "Bazel build system"
+      - name: "Meson"
+        globs: ["meson.build", "meson_options.txt"]
+        parser: "text"
+        description: "Meson build system"
 
   - name: "JavaScript / Node"
     icon: "\U0001F4E6"
@@ -66,10 +174,148 @@ categories:
         globs: ["tsconfig.json", "tsconfig.*.json"]
         parser: "json"
         description: "TypeScript configuration"
+      - name: "Vite"
+        globs: ["vite.config.*"]
+        parser: "text"
+        description: "Vite build config"
+      - name: "Webpack"
+        globs: ["webpack.config.*"]
+        parser: "text"
+        description: "Webpack bundler config"
+      - name: "Next.js"
+        globs: ["next.config.*"]
+        parser: "text"
+        description: "Next.js framework config"
+      - name: "Nuxt"
+        globs: ["nuxt.config.*"]
+        parser: "text"
+        description: "Nuxt framework config"
+      - name: "Babel"
+        globs: [".babelrc", ".babelrc.json", "babel.config.*"]
+        parser: "json"
+        description: "Babel transpiler config"
+      - name: "SWC"
+        globs: [".swcrc"]
+        parser: "json"
+        description: "SWC compiler config"
       - name: ".nvmrc"
         globs: [".nvmrc", ".node-version"]
         parser: "text"
         description: "Node version specification"
+      - name: ".npmrc"
+        globs: [".npmrc"]
+        parser: "ini"
+        description: "npm configuration"
+      - name: ".yarnrc"
+        globs: [".yarnrc", ".yarnrc.yml"]
+        parser: "yaml"
+        description: "Yarn configuration"
+      - name: "pnpm"
+        globs: ["pnpm-workspace.yaml", ".pnpmfile.cjs"]
+        parser: "yaml"
+        description: "pnpm workspace config"
+      - name: "Turbo"
+        globs: ["turbo.json"]
+        parser: "json"
+        description: "Turborepo configuration"
+      - name: "Nx"
+        globs: ["nx.json", "project.json"]
+        parser: "json"
+        description: "Nx monorepo configuration"
+      - name: "Tailwind CSS"
+        globs: ["tailwind.config.*"]
+        parser: "text"
+        description: "Tailwind CSS configuration"
+      - name: "PostCSS"
+        globs: ["postcss.config.*", ".postcssrc", ".postcssrc.*"]
+        parser: "text"
+        description: "PostCSS configuration"
+
+  - name: "Python"
+    icon: "\U0001F40D"
+    color: "#3776ab"
+    priority: 7
+    patterns:
+      - name: "pyproject.toml"
+        globs: ["pyproject.toml"]
+        parser: "toml"
+        description: "Python project configuration"
+      - name: "setup.cfg"
+        globs: ["setup.cfg"]
+        parser: "ini"
+        description: "Python setup configuration"
+      - name: "setup.py"
+        globs: ["setup.py"]
+        parser: "text"
+        description: "Python setup script"
+      - name: "requirements"
+        globs: ["requirements.txt", "requirements*.txt"]
+        parser: "text"
+        description: "Python dependencies"
+      - name: "Pipfile"
+        globs: ["Pipfile"]
+        parser: "toml"
+        description: "Pipenv configuration"
+      - name: "tox.ini"
+        globs: ["tox.ini"]
+        parser: "ini"
+        description: "Tox test runner config"
+      - name: ".python-version"
+        globs: [".python-version"]
+        parser: "text"
+        description: "Python version specification"
+      - name: "poetry"
+        globs: ["poetry.toml"]
+        parser: "toml"
+        description: "Poetry configuration"
+      - name: "conda"
+        globs: ["environment.yml", "environment.yaml", "conda.yml"]
+        parser: "yaml"
+        description: "Conda environment"
+
+  - name: "Go"
+    icon: "\U0001F535"
+    color: "#00add8"
+    priority: 8
+    patterns:
+      - name: "go.mod"
+        globs: ["go.mod"]
+        parser: "text"
+        description: "Go module definition"
+      - name: ".golangci"
+        globs: [".golangci.yml", ".golangci.yaml", ".golangci.toml", ".golangci.json"]
+        parser: "yaml"
+        description: "GolangCI-Lint configuration"
+      - name: ".goreleaser"
+        globs: [".goreleaser.yml", ".goreleaser.yaml"]
+        parser: "yaml"
+        description: "GoReleaser configuration"
+      - name: ".air"
+        globs: [".air.toml"]
+        parser: "toml"
+        description: "Air live reload configuration"
+
+  - name: "Rust"
+    icon: "\U0001F980"
+    color: "#dea584"
+    priority: 9
+    patterns:
+      - name: "Cargo.toml"
+        globs: ["Cargo.toml"]
+        parser: "toml"
+        description: "Rust package manifest"
+      - name: "rust-toolchain"
+        globs: ["rust-toolchain", "rust-toolchain.toml"]
+        parser: "toml"
+        description: "Rust toolchain specification"
+      - name: ".cargo/config"
+        globs: [".cargo/config", ".cargo/config.toml"]
+        parser: "toml"
+        description: "Cargo configuration"
+      - name: "clippy"
+        globs: ["clippy.toml", ".clippy.toml"]
+        parser: "toml"
+        description: "Clippy linter configuration"
 
   - name: "Linting / Formatting"
     icon: "\u2728"
@@ -88,6 +334,38 @@ categories:
         globs: [".editorconfig"]
         parser: "ini"
         description: "Editor configuration"
+      - name: "Stylelint"
+        globs: [".stylelintrc", ".stylelintrc.*", "stylelint.config.*"]
+        parser: "json"
+        description: "Stylelint CSS linter"
+      - name: "Rubocop"
+        globs: [".rubocop.yml", ".rubocop.yaml"]
+        parser: "yaml"
+        description: "Ruby linter configuration"
+      - name: "Ruff"
+        globs: ["ruff.toml", ".ruff.toml"]
+        parser: "toml"
+        description: "Ruff Python linter"
+      - name: "Biome"
+        globs: ["biome.json", "biome.jsonc"]
+        parser: "json"
+        description: "Biome linter/formatter"
+      - name: "dprint"
+        globs: ["dprint.json", ".dprint.json"]
+        parser: "json"
+        description: "dprint formatter"
+      - name: "Flake8"
+        globs: [".flake8"]
+        parser: "ini"
+        description: "Flake8 Python linter"
+      - name: "Black"
+        globs: [".black.toml"]
+        parser: "toml"
+        description: "Black Python formatter"
+      - name: "markdownlint"
+        globs: [".markdownlint.yml", ".markdownlint.yaml", ".markdownlint.json", ".markdownlintrc"]
+        parser: "json"
+        description: "Markdown linter"
 
   - name: "Git"
     icon: "\U0001F4DD"
@@ -98,3 +376,197 @@ categories:
         globs: [".gitignore"]
         parser: "text"
         description: "Git ignore rules"
+      - name: ".gitattributes"
+        globs: [".gitattributes"]
+        parser: "text"
+        description: "Git attributes"
+      - name: ".gitmodules"
+        globs: [".gitmodules"]
+        parser: "ini"
+        description: "Git submodules"
+      - name: "Git hooks"
+        globs: [".husky/*", ".githooks/*"]
+        parser: "text"
+        description: "Git hook scripts"
+      - name: "commitlint"
+        globs: [".commitlintrc", ".commitlintrc.*", "commitlint.config.*"]
+        parser: "json"
+        description: "Commit message linter"
+      - name: "lint-staged"
+        globs: [".lintstagedrc", ".lintstagedrc.*", "lint-staged.config.*"]
+        parser: "json"
+        description: "Pre-commit file filter"
+      - name: ".gitpod"
+        globs: [".gitpod.yml"]
+        parser: "yaml"
+        description: "Gitpod workspace config"
+
+  - name: "Infrastructure as Code"
+    icon: "\u2601\uFE0F"
+    color: "#7c3aed"
+    priority: 12
+    patterns:
+      - name: "Terraform"
+        globs: ["*.tf", "*.tfvars"]
+        parser: "text"
+        description: "Terraform infrastructure"
+      - name: "Ansible"
+        globs: ["ansible.cfg", "playbook.yml", "playbooks/*.yml"]
+        parser: "yaml"
+        description: "Ansible automation"
+      - name: "Kubernetes"
+        globs: ["k8s/*.yml", "k8s/*.yaml", "kubernetes/*.yml", "kubernetes/*.yaml"]
+        parser: "yaml"
+        description: "Kubernetes manifests"
+      - name: "Helm"
+        globs: ["Chart.yaml", "Chart.yml", "values.yaml", "values.yml", "values.*.yaml"]
+        parser: "yaml"
+        description: "Helm chart configuration"
+      - name: "Pulumi"
+        globs: ["Pulumi.yaml", "Pulumi.*.yaml"]
+        parser: "yaml"
+        description: "Pulumi infrastructure"
+      - name: "Fly.io"
+        globs: ["fly.toml"]
+        parser: "toml"
+        description: "Fly.io deployment config"
+      - name: "Railway"
+        globs: ["railway.json", "railway.toml"]
+        parser: "json"
+        description: "Railway deployment config"
+      - name: "Render"
+        globs: ["render.yaml"]
+        parser: "yaml"
+        description: "Render deployment config"
+      - name: "Vercel"
+        globs: ["vercel.json"]
+        parser: "json"
+        description: "Vercel deployment config"
+      - name: "Netlify"
+        globs: ["netlify.toml"]
+        parser: "toml"
+        description: "Netlify deployment config"
+
+  - name: "Testing"
+    icon: "\U0001F9EA"
+    color: "#22c55e"
+    priority: 13
+    patterns:
+      - name: "Jest"
+        globs: ["jest.config.*"]
+        parser: "json"
+        description: "Jest test runner"
+      - name: "Vitest"
+        globs: ["vitest.config.*"]
+        parser: "text"
+        description: "Vitest test runner"
+      - name: "Playwright"
+        globs: ["playwright.config.*"]
+        parser: "text"
+        description: "Playwright E2E testing"
+      - name: "Cypress"
+        globs: ["cypress.config.*", "cypress.json"]
+        parser: "json"
+        description: "Cypress E2E testing"
+      - name: "pytest"
+        globs: ["pytest.ini", "conftest.py"]
+        parser: "ini"
+        description: "Pytest configuration"
+      - name: "PHPUnit"
+        globs: ["phpunit.xml", "phpunit.xml.dist"]
+        parser: "text"
+        description: "PHPUnit testing"
+      - name: "Coverage"
+        globs: [".nycrc", ".nycrc.*", ".c8rc", ".c8rc.*", ".coveragerc", "codecov.yml"]
+        parser: "json"
+        description: "Code coverage configuration"
+      - name: ".tool-versions"
+        globs: [".tool-versions"]
+        parser: "text"
+        description: "asdf version manager"
+
+  - name: "Security"
+    icon: "\U0001F512"
+    color: "#dc2626"
+    priority: 14
+    patterns:
+      - name: "Dependabot"
+        globs: [".github/dependabot.yml", ".github/dependabot.yaml"]
+        parser: "yaml"
+        description: "Dependabot configuration"
+      - name: "Renovate"
+        globs: ["renovate.json", "renovate.json5", ".renovaterc", ".renovaterc.json"]
+        parser: "json"
+        description: "Renovate bot configuration"
+      - name: "CODEOWNERS"
+        globs: ["CODEOWNERS", ".github/CODEOWNERS", "docs/CODEOWNERS"]
+        parser: "text"
+        description: "Code ownership rules"
+      - name: "Security Policy"
+        globs: ["SECURITY.md", ".github/SECURITY.md"]
+        parser: "text"
+        description: "Security policy"
+      - name: "Snyk"
+        globs: [".snyk"]
+        parser: "yaml"
+        description: "Snyk security config"
+      - name: "Trivy"
+        globs: [".trivyignore", "trivy.yaml"]
+        parser: "text"
+        description: "Trivy security scanner"
+
+  - name: "Editor / DX"
+    icon: "\U0001F4BB"
+    color: "#64748b"
+    priority: 15
+    patterns:
+      - name: "VS Code"
+        globs: [".vscode/settings.json", ".vscode/extensions.json", ".vscode/launch.json", ".vscode/tasks.json"]
+        parser: "json"
+        description: "VS Code workspace settings"
+      - name: "IntelliJ"
+        globs: [".idea/*.xml"]
+        parser: "text"
+        description: "IntelliJ IDEA settings"
+      - name: "Cursor"
+        globs: [".cursor/*", ".cursorrules"]
+        parser: "text"
+        description: "Cursor editor settings"
+      - name: "Claude"
+        globs: ["CLAUDE.md", ".claude/*"]
+        parser: "text"
+        description: "Claude Code project config"
+      - name: "DevContainer"
+        globs: [".devcontainer/devcontainer.json", ".devcontainer.json"]
+        parser: "json"
+        description: "Dev container configuration"
+      - name: "direnv"
+        globs: [".envrc"]
+        parser: "text"
+        description: "direnv configuration"
+
+  - name: "Documentation"
+    icon: "\U0001F4DA"
+    color: "#0ea5e9"
+    priority: 16
+    patterns:
+      - name: "MkDocs"
+        globs: ["mkdocs.yml"]
+        parser: "yaml"
+        description: "MkDocs documentation"
+      - name: "Docusaurus"
+        globs: ["docusaurus.config.*"]
+        parser: "text"
+        description: "Docusaurus documentation"
+      - name: "Sphinx"
+        globs: ["docs/conf.py", "conf.py"]
+        parser: "text"
+        description: "Sphinx documentation"
+      - name: "TypeDoc"
+        globs: ["typedoc.json"]
+        parser: "json"
+        description: "TypeDoc documentation"
+      - name: "VitePress"
+        globs: [".vitepress/config.*"]
+        parser: "text"
+        description: "VitePress documentation"
