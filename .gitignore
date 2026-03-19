@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Go binary
+confradar
+*.exe
+*.test
+*.out
+coverage.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
