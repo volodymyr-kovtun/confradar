@@ -1,0 +1,19 @@
+services:
+  - name: user-service
+    url: http://users:8001
+    timeout: 10s
+    health_check: /healthz
+
+  - name: order-service
+    url: http://orders:8002
+    timeout: 15s
+    health_check: /healthz
+
+  - name: payment-service
+    url: http://payments:8003
+    timeout: 20s
+    health_check: /healthz
+
+rate_limit:
+  requests_per_second: 100
+  burst: 50

@@ -1,0 +1,16 @@
+extra_categories:
+  - name: "API Config"
+    patterns:
+      - "config/api.json"
+      - "config/gateway.yml"
+
+health_checks:
+  env_sync:
+    enabled: true
+    files:
+      - ".env"
+  file_exists:
+    enabled: true
+    paths:
+      - "config/api.json"
+      - "config/gateway.yml"
