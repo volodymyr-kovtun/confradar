@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+
+project_name: confradar
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - main: .
+    binary: confradar
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+      - -X github.com/volodymyrkovtun/confradar/cmd.version={{.Version}}
+      - -X github.com/volodymyrkovtun/confradar/cmd.commit={{.Commit}}
+      - -X github.com/volodymyrkovtun/confradar/cmd.date={{.Date}}
+
+archives:
+  - id: default
+    format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^chore:"
+
+brews:
+  - name: confradar
+    repository:
+      owner: volodymyrkovtun
+      name: homebrew-tap
+    homepage: "https://github.com/volodymyrkovtun/confradar"
+    description: "Instantly see every config file in your project"
+    license: "MIT"
+    install: |
+      bin.install "confradar"
+    test: |
+      system "#{bin}/confradar", "version"
